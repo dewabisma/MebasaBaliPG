@@ -8,16 +8,11 @@
 import SwiftUI
 
 struct NavTabView: View {
-    init() {
-        // Customize the appearance of the navigation bar
-        UINavigationBar.appearance().backgroundColor = .red
-        UINavigationBar.appearance().tintColor = .white
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
-    }
+    @State private var isPresentingView:Bool = false
     
     var body: some View {
         TabView {
-            CoursesScreen()
+            CoursesScreen(isPresentingNewView: $isPresentingView)
                 .tabItem {
                     Label("Courses", systemImage: "graduationcap")
                 }
@@ -26,7 +21,11 @@ struct NavTabView: View {
                 .tabItem {
                     Label("Progress", systemImage: "chart.xyaxis.line")
                 }
-        }.tabViewStyle(DefaultTabViewStyle())
+        }
+        .tint(.black)
+        .fullScreenCover(isPresented: $isPresentingView) {
+            DialogueScreen(isPresentingView: $isPresentingView)
+        }
     }
 }
 

@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct CoursesScreen: View {
+    @Binding var isPresentingNewView:Bool
+    
     var body: some View {
+        
         VStack(spacing: 0) {
+            
             // Heading
             HStack {
                 VStack(alignment: .leading) {
@@ -26,11 +30,14 @@ struct CoursesScreen: View {
             
             // Divider
             Divider()
-        
+            
             // Topics
             ScrollView {
                 VStack(spacing: 18) {
                     TopicView()
+                        .onTapGesture {
+                            isPresentingNewView = true
+                        }
                     
                     TopicView()
                     
@@ -44,15 +51,20 @@ struct CoursesScreen: View {
                 }
                 .padding([.horizontal, .top], 24)
             }
-           
-            
         }
-
     }
 }
 
 struct CoursesScreen_Previews: PreviewProvider {
     static var previews: some View {
-        CoursesScreen()
+        WithState()
+    }
+}
+
+struct WithState: View {
+    @State var isPresentingNewView:Bool = false
+    
+    var body: some View {
+        CoursesScreen(isPresentingNewView: $isPresentingNewView)
     }
 }

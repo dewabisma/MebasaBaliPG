@@ -7,20 +7,23 @@
 
 import SwiftUI
 
+@available(iOS 16.0, *)
 struct CoursesScreen: View {
-    @Binding var isPresentingNewView:Bool
+    
+    let topics = [
+        Topic(title: "Greeting", description: "Understanding greeting in Balinese", image: "book"),
+        Topic(title: "Direction", description: "Understanding direction in Balinese", image: "book")
+    ]
     
     var body: some View {
-        
         VStack(spacing: 0) {
-            
             // Heading
             HStack {
                 VStack(alignment: .leading) {
                     Text("Om Swastiastu")
                     
                     Text("Courses")
-                        .font(.title)
+                        .font(.largeTitle)
                 }
                 
                 Spacer()
@@ -34,20 +37,17 @@ struct CoursesScreen: View {
             // Topics
             ScrollView {
                 VStack(spacing: 18) {
-                    TopicView()
-                        .onTapGesture {
-                            isPresentingNewView = true
-                        }
-                    
-                    TopicView()
-                    
-                    TopicView()
-                    
-                    TopicView()
-                    
-                    TopicView()
-                    
-                    TopicView()
+                    NavigationLink{
+                        DialogueScreen().toolbar(.hidden, for: .navigationBar)
+                    } label: {
+                        TopicView(topic: topics[0])
+                    }
+                   
+                    NavigationLink {
+                        DialogueScreenExperiment().toolbar(.hidden, for: .navigationBar)
+                    } label: {
+                        TopicView(topic: topics[1])
+                    }
                 }
                 .padding([.horizontal, .top], 24)
             }
@@ -55,16 +55,11 @@ struct CoursesScreen: View {
     }
 }
 
+@available(iOS 16.0, *)
 struct CoursesScreen_Previews: PreviewProvider {
     static var previews: some View {
-        WithState()
+       CoursesScreen()
     }
 }
 
-struct WithState: View {
-    @State var isPresentingNewView:Bool = false
-    
-    var body: some View {
-        CoursesScreen(isPresentingNewView: $isPresentingNewView)
-    }
-}
+

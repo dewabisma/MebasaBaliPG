@@ -7,27 +7,35 @@
 
 import SwiftUI
 
+struct Topic {
+    var title:String
+    var description:String
+    var image:String
+}
+
 struct TopicView: View {
+    var topic: Topic
+    
     var body: some View {
         HStack() {
             HStack() {
                 VStack(alignment: .leading, spacing: 12) {
-                    Text("The Essentials")
+                    Text(topic.title)
                         .font(.topicHeading)
                         
-                    
-                    Text("Understanding essential conversation in Balinese")
+                    Text(topic.description)
                 }
                 
                 
                 Spacer()
                 
                 VStack() {
-                    Image(systemName: "book")
+                    Image(systemName: topic.image)
                         .font(.system(size: 32))
                 }
             }
             .padding(24)
+            .foregroundColor(.black)
         }
         .frame(maxWidth: .infinity)
         .background(.gray)
@@ -38,7 +46,7 @@ struct TopicView: View {
 struct TopicView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            TopicView()
+            TopicView(topic: Topic(title: "The Essentials", description: "Understanding essential conversation in Balinese", image: "book"))
         }
         .padding(.horizontal, 24)
     }

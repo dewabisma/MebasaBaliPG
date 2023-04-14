@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension View {
-    func transparentSheet<Content: View>(_ style: AnyShapeStyle, show: Binding<Bool>, onDismiss: @escaping () -> (), @ViewBuilder content: @escaping () -> Content) -> some View {
+    func transparentSheet<Content: View>(show: Binding<Bool>, onDismiss: @escaping () -> (), @ViewBuilder content: @escaping () -> Content) -> some View {
         self.fullScreenCover(isPresented: show, onDismiss: onDismiss) {
             content()
                 .background(RemovebackgroundColor())

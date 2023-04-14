@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DialogueHeaderView: View {
     @Binding var progress:Float
+    @Binding var isPresentingSheet:Bool
     
     var body: some View {
         HStack(spacing: 0) {
@@ -20,6 +21,14 @@ struct DialogueHeaderView: View {
                 .resizable()
                 .frame(maxHeight: .infinity)
                 .scaledToFit()
+                .onTapGesture {
+                    isPresentingSheet.toggle()
+                }
+                .transparentSheet(show: $isPresentingSheet) {
+                    // onDismiss
+                } content:{
+                    PausePromptView()
+                }
         }
         .frame(maxWidth: .infinity, maxHeight: 25)
         .padding(.horizontal, 32)
@@ -29,13 +38,15 @@ struct DialogueHeaderView: View {
 struct DialogueHeaderView_Previews: PreviewProvider {
     static var previews: some View {
         StatefulPreviewWrapper(0.2) { progress in
-            VStack(spacing: 0) {
-                DialogueHeaderView(progress: progress)
-                
-                Spacer()
+            StatefulPreviewWrapper(false) { isPresenting in
+                VStack(spacing: 0) {
+                    DialogueHeaderView(progress: progress, isPresentingSheet: isPresenting)
+                    
+                    Spacer()
+                }
+                .padding(.top, 32)
+                .ignoresSafeArea(edges: .top)
             }
-            .padding(.top, 32)
-            .ignoresSafeArea(edges: .top)
         }
     }
 }

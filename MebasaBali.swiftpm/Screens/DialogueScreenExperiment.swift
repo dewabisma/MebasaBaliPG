@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct DialogueScreen: View {
+@available(iOS 16.0, *)
+struct DialogueScreenExperiment: View {
     @StateObject var audioManager = AudioManager.shared
     
     @State var progress:Float = 0.5
@@ -46,7 +47,7 @@ struct DialogueScreen: View {
                             message: dialogue.text,
                             meaning: dialogue.meaning,
                             soundKey: dialogue.soundKey,
-                            autoPlay: isBot,
+                            autoPlay: isBot ? false: false,
                             pointy: isUser ? .right : .left
                         ) {
                             if isUser {
@@ -65,20 +66,31 @@ struct DialogueScreen: View {
                 .frame(maxWidth: .infinity)
             }
             
-            if progressCounter < userSentences.count {
-                AnsweringBoxView(
-                    counter: $progressCounter,
-                    dialogues: $dialogues,
-                    botIsTalking: $botIsTalking,
-                    dialogue: userSentences[progressCounter],
-                    botSentences: botSentences
-                )
-                .environmentObject(audioManager)
-            } else {
-                Text("DONE TALKING").onTapGesture {
-                    isPresentingSheet = false
+            Grid(alignment: .bottom) {
+                GridRow() {
+                    Text("Suksma")
+                    Text("Om Swastiastu")
+                    Text("Rahajeng")
+                    Text("Om Swastiastu")
+                    Text("Rahajeng")
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(.yellow)
+                
+                GridRow() {
+                    Text("Suksma")
+                    Text("Om Swastiastu")
+                    Text("Rahajeng")
+                    Text("Om Swastiastu")
+                    Text("Rahajeng")
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(.yellow)
             }
+            .padding(.all, 24)
+            .frame(maxWidth: .infinity)
+            .frame(height: 300)
+            .background(Color(hue: 0, saturation: 0, brightness: 0.8))
         }
         .onAppear {
             audioManager.deleteAllAudios()
@@ -87,8 +99,9 @@ struct DialogueScreen: View {
     }
 }
 
-struct DialogueScreen_Previews: PreviewProvider {
+@available(iOS 16.0, *)
+struct DialogueScreenExperiment_Previews: PreviewProvider {
     static var previews: some View {
-        DialogueScreen()
+        DialogueScreenExperiment()
     }
 }

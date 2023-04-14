@@ -41,7 +41,6 @@ struct PromptButton: View {
 
 struct PausePromptView: View {
     @Environment(\.dismiss) var dismiss
-    @Binding var isPresentingView:Bool
     
     var body: some View {
         VStack(spacing: 0) {
@@ -65,7 +64,6 @@ struct PausePromptView: View {
                     
                     PromptButton(icon: "door.left.hand.open", title: "Quit") {
                         dismiss()
-                        isPresentingView.toggle()
                     }
                 }
             }
@@ -74,6 +72,9 @@ struct PausePromptView: View {
             .background(
                 Color(hue: 0, saturation: 0, brightness: 0.4)
             )
+            .onTapGesture {
+                //
+            }
         }
         .background(.black.opacity(0.000001))
         .onTapGesture {
@@ -97,12 +98,11 @@ struct PausePromptView: View {
                 }
         )
     }
-    
-    struct PausePromptView_Previews: PreviewProvider {
-        static var previews: some View {
-            StatefulPreviewWrapper(false) { value in
-                PausePromptView(isPresentingView: value)
-            }
-        }
+}
+
+
+struct PausePromptView_Previews: PreviewProvider {
+    static var previews: some View {
+        PausePromptView()
     }
 }

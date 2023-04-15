@@ -7,13 +7,16 @@
 
 import SwiftUI
 
+@available(iOS 16.0, *)
 struct DialogueHeaderView: View {
-    @Binding var progress:Float
+    @EnvironmentObject var audioManager:AudioManager
+    
+    var progress:Float
     @Binding var isPresentingSheet:Bool
     
     var body: some View {
         HStack(spacing: 0) {
-            CircularProgressView(progress: $progress, circleLineWidth: 4, isTextVisible: false)
+            CircularProgressView(progress: progress, circleLineWidth: 4, isTextVisible: false)
             
             Spacer()
             
@@ -23,6 +26,7 @@ struct DialogueHeaderView: View {
                 .scaledToFit()
                 .onTapGesture {
                     isPresentingSheet.toggle()
+                    audioManager.pausePlayback()
                 }
                 .transparentSheet(show: $isPresentingSheet) {
                     // onDismiss
@@ -37,16 +41,15 @@ struct DialogueHeaderView: View {
 
 struct DialogueHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        StatefulPreviewWrapper(0.2) { progress in
-            StatefulPreviewWrapper(false) { isPresenting in
-                VStack(spacing: 0) {
-                    DialogueHeaderView(progress: progress, isPresentingSheet: isPresenting)
-                    
-                    Spacer()
-                }
-                .padding(.top, 32)
-                .ignoresSafeArea(edges: .top)
+        StatefulPreviewWrapper(false) { isPresenting in
+            VStack(spacing: 0) {
+                DialogueHeaderView(progress: 0.2, isPresentingSheet: isPresenting)
+                
+                Spacer()
             }
+            .padding(.top, 32)
+            .ignoresSafeArea(edges: .top)
         }
+        
     }
 }

@@ -101,7 +101,12 @@ struct DragAndDrop: View {
                                         value, error in
                                         
                                         guard let url = value else {return}
-                                        print(url)
+                                        if item.id == "\(url)" {
+                                            withAnimation {
+                                                item.isShowing = true
+                                                updateShuffledArray(character: item)
+                                            }
+                                        }
                                     }
                                 }
                                 
@@ -225,6 +230,17 @@ struct DragAndDrop: View {
         
         // Horizontal Padding
         return size.width * (character.padding * 2) + 15
+    }
+    
+    // Mark: Updating Shuffled Array
+    func updateShuffledArray(character: Character) {
+        for index in shuffledRows.indices {
+            for subIndex in shuffledRows[index].indices {
+                if shuffledRows[index][subIndex].id == character.id {
+                    shuffledRows[index][subIndex].isShowing = true
+                }
+            }
+        }
     }
 }
 

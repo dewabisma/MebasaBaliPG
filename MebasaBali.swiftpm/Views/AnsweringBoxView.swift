@@ -7,12 +7,7 @@
 
 import SwiftUI
 
-struct DialogueSentence {
-    var soundKey: String
-    var text: String
-    var meaning: String
-    var isDone = false
-}
+
 
 struct ButtonIcon: View {
     var iconName:String

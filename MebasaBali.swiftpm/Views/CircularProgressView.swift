@@ -19,7 +19,7 @@ struct ViewIsVisible<Content: View>:View {
 }
 
 struct CircularProgressView: View {
-    @Binding var progress: Float
+    var progress: Float
     
     var circleLineWidth:CGFloat = 30.0
     var circleColor:Color = .gray
@@ -54,7 +54,7 @@ struct CircularProgressView_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 0) {
             HStack {
-                CircularProgressView(progress: .constant(0.0), circleColor: .blue)
+                CircularProgressView(progress: 0.2, circleColor: .blue)
             }
             .frame(width: 300, height: 300)
         }

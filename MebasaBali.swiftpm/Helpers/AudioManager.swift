@@ -13,6 +13,7 @@ class AudioManager: NSObject, AVAudioRecorderDelegate, AVAudioPlayerDelegate, Ob
     
     @Published var isRecording = false
     @Published var isPlaying = false
+    @Published var playedKey: String?
     @Published var isNotPermitted = false
     @Published var userVoices:[URL] = []
     
@@ -178,6 +179,18 @@ class AudioManager: NSObject, AVAudioRecorderDelegate, AVAudioPlayerDelegate, Ob
         } catch {
             print("Error starting playback: \(error.localizedDescription)")
         }
+    }
+    
+    func resumePlayback() {
+        audioPlayer?.play()
+        
+        print("Resuming playback")
+    }
+    
+    func pausePlayback() {
+        audioPlayer?.pause()
+        
+        print("Pausing playback")
     }
     
     func stopPlayback() {

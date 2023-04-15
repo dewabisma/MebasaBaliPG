@@ -11,90 +11,94 @@ import SwiftUI
 struct DialogueScreenExperiment: View {
     @StateObject var audioManager = AudioManager.shared
     
-    @State var progress:Float = 0.5
+    @State var progress: Float = 0.0
     @State var progressCounter: Int = 0
     @State var isPresentingSheet = false
     @State var botIsTalking = true
-    @State var dialogues:[DialogueSentence] = [
-        DialogueSentence(soundKey: "a-sentences", text: "Om Swastiastu", meaning: "Polite Greeting, literally means may you be blessed by the Lord")
-    ]
+    @State var dialogues: [DialogueSentence] = dialogues_
     
-    var userSentences: [DialogueSentence] = [
-        DialogueSentence(soundKey: "b-phrases", text: "rahajeng", meaning: "Welcome or greeting"),
-        DialogueSentence(soundKey: "b-sentences", text: "becik", meaning: "good or well"),
-    ]
-    var botSentences: [DialogueSentence] = [
-        DialogueSentence(soundKey: "a-phrases", text: "Punapi gatra?", meaning: "How are you?"),
+    let columns: [GridItem] = [
+        GridItem(.flexible(), spacing: 8, alignment: nil),
+        GridItem(.flexible(), spacing: 8, alignment: nil),
+        GridItem(.flexible(), spacing: 8, alignment: nil),
     ]
     
     var body: some View {
         VStack(spacing: 0) {
             DialogueHeaderView(
-                progress: $progress,
+                progress: (Float(progressCounter) / Float(dialogues.count)),
                 isPresentingSheet: $isPresentingSheet
             )
             .padding(.vertical, 16)
+            .environmentObject(audioManager)
             
-            ScrollView {
-                VStack(spacing: 24) {
-                    ForEach(0..<dialogues.count, id: \.self) { index in
-                        let isBot = index == 0 || index % 2 == 0
-                        let isUser = index != 0 && index % 2 == 1
-                        let dialogue = dialogues[index]
-                        
-                        DialogueChatView(
-                            botIsTalking: $botIsTalking,
-                            message: dialogue.text,
-                            meaning: dialogue.meaning,
-                            soundKey: dialogue.soundKey,
-                            autoPlay: isBot ? false: false,
-                            pointy: isUser ? .right : .left
-                        ) {
-                            if isUser {
-                                audioManager.startPlayback(key: "\(dialogue.soundKey).m4a")
-                                
-                                return
-                            }
+            ScrollViewReader { proxy in
+                ScrollView {
+                    VStack(spacing: 24) {
+                        ForEach(0...min(progressCounter, dialogues.count - 1), id: \.self) { index in
+                            let dialogue = $dialogues[index]
                             
-                            audioManager.startPlaybackFromResources(key: dialogue.soundKey)
+                            DialogueChatView(
+                                dialogue: dialogue,
+                                dialogues: $dialogues,
+                                botIsTalking: $botIsTalking,
+                                progressCounter: $progressCounter,
+                                autoPlay: true,
+                                pointy: dialogue.isBot.wrappedValue ? .left : .right
+                            ) {
+                                audioManager.startPlaybackFromResources(key: dialogue.soundKey.wrappedValue, ext: "wav")
+                            }
+                            .environmentObject(audioManager)
+                            .id(index)
                         }
-                        .environmentObject(audioManager)
+                    }
+                    .padding(.vertical, 32)
+                    .padding(.horizontal, 24)
+                    .frame(maxWidth: .infinity)
+                }
+                .onChange(of: progressCounter) { newValue in
+                    proxy.scrollTo(newValue, anchor: .center)
+                }
+            }
+            
+            if progressCounter < dialogues.count {
+                VStack(spacing: 24) {
+                    VStack(spacing: 12) {
+                        Text("Please drag the text according to the voice")
+                        Text("Click the chat box to listen to the voice again")
+                    }
+                    
+                    LazyVGrid(columns: columns, spacing: 8) {
+                        ForEach(dialogues.filter({ dialog in
+                            !dialog.isBot
+                        }), id: \.self) { dialogue in
+                            Text(dialogue.text)
+                                .frame(maxWidth:.infinity, minHeight: 100)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .fill(Color(hue: 0, saturation: 0, brightness: 0.7))
+                                )
+                                .onDrag {
+                                    return .init(contentsOf: URL(string: dialogue.id))!
+                                }
+                                .opacity(dialogue.isAnswered ? 0 : 1)
+                                .background {
+                                    RoundedRectangle(cornerRadius: 6, style: .continuous).fill(dialogue.isAnswered ? .gray.opacity(0.25) : .clear)
+                                }
+                        }
                     }
                 }
-                .padding(.vertical, 32)
-                .padding(.horizontal, 24)
+                .padding(24)
+                .background(Color(hue: 0, saturation: 0, brightness: 0.8))
+            } else {
+                VStack {
+                    NavigationLink(destination: ContentView()) {
+                        Text("Dialogue is finished")
+                    }
+                }
                 .frame(maxWidth: .infinity)
+                .frame(height: 200)
             }
-            
-            Grid(alignment: .bottom) {
-                GridRow() {
-                    Text("Suksma")
-                    Text("Om Swastiastu")
-                    Text("Rahajeng")
-                    Text("Om Swastiastu")
-                    Text("Rahajeng")
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(.yellow)
-                
-                GridRow() {
-                    Text("Suksma")
-                    Text("Om Swastiastu")
-                    Text("Rahajeng")
-                    Text("Om Swastiastu")
-                    Text("Rahajeng")
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(.yellow)
-            }
-            .padding(.all, 24)
-            .frame(maxWidth: .infinity)
-            .frame(height: 300)
-            .background(Color(hue: 0, saturation: 0, brightness: 0.8))
-        }
-        .onAppear {
-            audioManager.deleteAllAudios()
-            audioManager.getAudios()
         }
     }
 }

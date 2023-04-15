@@ -39,8 +39,10 @@ struct PromptButton: View {
 }
 
 
+@available(iOS 16.0, *)
 struct PausePromptView: View {
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var audioManager:AudioManager
     
     var body: some View {
         VStack(spacing: 0) {
@@ -60,10 +62,13 @@ struct PausePromptView: View {
                 VStack(spacing: 16) {
                     PromptButton(icon: "play.fill", title: "Continue Lesson") {
                         dismiss()
+                        audioManager.resumePlayback()
                     }
                     
-                    PromptButton(icon: "door.left.hand.open", title: "Quit") {
-                        dismiss()
+                    NavigationLink(destination: ContentView()) {
+                        PromptButton(icon: "door.left.hand.open", title: "Quit") {
+                            dismiss()
+                        }
                     }
                 }
             }
@@ -101,6 +106,7 @@ struct PausePromptView: View {
 }
 
 
+@available(iOS 16.0, *)
 struct PausePromptView_Previews: PreviewProvider {
     static var previews: some View {
         PausePromptView()

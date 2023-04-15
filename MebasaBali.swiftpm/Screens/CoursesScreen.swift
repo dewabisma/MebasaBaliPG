@@ -38,7 +38,7 @@ struct CoursesScreen: View {
             ScrollView {
                 VStack(spacing: 18) {
                     NavigationLink{
-                        DialogueScreen().toolbar(.hidden, for: .navigationBar)
+                        DialogueScreenExperiment().toolbar(.hidden, for: .navigationBar)
                     } label: {
                         TopicView(topic: topics[0])
                     }

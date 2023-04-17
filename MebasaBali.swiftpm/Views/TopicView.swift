@@ -7,12 +7,6 @@
 
 import SwiftUI
 
-struct Topic {
-    var title:String
-    var description:String
-    var image:String
-}
-
 struct TopicView: View {
     var topic: Topic
     
@@ -24,21 +18,19 @@ struct TopicView: View {
                         .font(.topicHeading)
                         
                     Text(topic.description)
+                        .multilineTextAlignment(.leading)
                 }
                 
+                Spacer(minLength: 200)
                 
-                Spacer()
-                
-                VStack() {
-                    Image(systemName: topic.image)
-                        .font(.system(size: 32))
-                }
+                Image(systemName: topic.image)
+                    .font(.system(size: 40))
             }
             .padding(24)
-            .foregroundColor(.black)
+            .foregroundColor(.white)
         }
         .frame(maxWidth: .infinity)
-        .background(.gray)
+        .background(Color("Blue600"))
         .cornerRadius(24)
     }
 }
@@ -46,7 +38,7 @@ struct TopicView: View {
 struct TopicView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            TopicView(topic: Topic(title: "The Essentials", description: "Understanding essential conversation in Balinese", image: "book"))
+            TopicView(topic: Topic(title: "The Essentials", description: "Understanding essential conversation in Balinese",explanation: "dkowakodwakodko", image: "book"))
         }
         .padding(.horizontal, 24)
     }

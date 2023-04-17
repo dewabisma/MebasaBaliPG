@@ -159,7 +159,7 @@ struct AnsweringBoxView: View {
                     } else {
                         audioManager.startRecording(key: "\(dialogue.text).m4a")
                         audioManager.didFinishRecording = {
-                            let newDialogue = DialogueSentence(soundKey: dialogue.text, text: dialogue.text, meaning: dialogue.meaning)
+                            let newDialogue = DialogueSentence(soundKey: dialogue.text, text: dialogue.text, meaning: dialogue.meaning, explanation: dialogue.explanation)
                             
                             dialogues.append(newDialogue)
                             
@@ -184,16 +184,16 @@ struct AnsweringBoxView: View {
     }
 }
 
-struct SwiftUIView_Previews: PreviewProvider {
+struct AnsweringBoxView_Previews: PreviewProvider {
     static var previews: some View {
         StatefulPreviewWrapper(0) { num in
-            StatefulPreviewWrapper([DialogueSentence(soundKey: "a-phrases", text: "Punapi gatra?", meaning: "How are you?")]) { dialogues in
+            StatefulPreviewWrapper([DialogueSentence(soundKey: "a-phrases", text: "Punapi gatra?", meaning: "How are you?", explanation: "dkowakodk")]) { dialogues in
                 AnsweringBoxView(
                     counter: num,
                     dialogues: dialogues,
                     botIsTalking: .constant(false),
-                    dialogue: DialogueSentence(soundKey: "a-phrases", text: "Punapi gatra?", meaning: "How are you?"),
-                    botSentences: [DialogueSentence(soundKey: "a-phrases", text: "Punapi gatra?", meaning: "How are you?")])
+                    dialogue: DialogueSentence(soundKey: "a-phrases", text: "Punapi gatra?", meaning: "How are you?", explanation: "dkwaodkowakd"),
+                    botSentences: [DialogueSentence(soundKey: "a-phrases", text: "Punapi gatra?", meaning: "How are you?", explanation: "dkwoakdoakd")])
             }
         }
     }

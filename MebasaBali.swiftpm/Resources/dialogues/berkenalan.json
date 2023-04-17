@@ -1,0 +1,56 @@
+[
+    {
+        "id": "1",
+        "soundKey": "perkenalan-1",
+        "text": "Om Swastiastu",
+        "meaning": "Hello",
+        "explanation": "**Om swastiastu** literally means may you be blessed. It's used as a greeting when you meet someone, visiting someone house, and starting a speech",
+        "isAnswered": false,
+        "isBot": true
+    },
+    {
+        "id": "2",
+        "soundKey": "perkenalan-2",
+        "text": "Om Swastiastu",
+        "meaning": "Hello",
+        "explanation": "**Om swastiastu** literally means may you be blessed. It's used as a greeting when you meet someone, visiting someone house, and starting a speech",
+        "isAnswered": false,
+        "isBot": false
+    },
+    {
+        "id": "3",
+        "soundKey": "perkenalan-3",
+        "text": "Ragane sira wastane?",
+        "meaning": "What is your name?",
+        "explanation": "**Ragane** means you, **sira** means who and used to ask for identity, and **wastane** means your name which is a variant of __wastan__ that means name",
+        "isAnswered": false,
+        "isBot": true
+    },
+    {
+        "id": "4",
+        "soundKey": "perkenalan-4",
+        "text": "Wastan tiange Ketut",
+        "meaning": "My name is Ketut",
+        "explanation": "**Wastan** means name, **tiange** means my which is a variant of __tiang__ that means I or me, and **Ketut** is a Balinese common name",
+        "isAnswered": false,
+        "isBot": false
+    },
+    {
+        "id": "5",
+        "soundKey": "perkenalan-5",
+        "text": "Saking napi ragane?",
+        "meaning": "Where are you from?",
+        "explanation": "**Saking** means come from or origin, **napi** means what but it also used to form an interrogative sentence, and **ragane** literally means you",
+        "isAnswered": false,
+        "isBot": true
+    },
+    {
+        "id": "6",
+        "soundKey": "perkenalan-6",
+        "text": "Tiang saking Amerika",
+        "meaning": "I'm from America",
+        "explanation": "**Tiang** means I or Me, **saking** means come from or origin, and **amerika** means America",
+        "isAnswered": false,
+        "isBot": false
+    },
+]

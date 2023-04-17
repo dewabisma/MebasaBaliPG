@@ -13,6 +13,7 @@ class AudioManager: NSObject, AVAudioRecorderDelegate, AVAudioPlayerDelegate, Ob
     
     @Published var isRecording = false
     @Published var isPlaying = false
+    @Published var isPaused = false
     @Published var playedKey: String?
     @Published var isNotPermitted = false
     @Published var userVoices:[URL] = []
@@ -182,13 +183,23 @@ class AudioManager: NSObject, AVAudioRecorderDelegate, AVAudioPlayerDelegate, Ob
     }
     
     func resumePlayback() {
-        audioPlayer?.play()
+        guard isPaused else {
+            print("No paused playback")
+            return
+        }
         
+        audioPlayer?.play()
         print("Resuming playback")
     }
     
     func pausePlayback() {
+        guard isPlaying else {
+            print("Currently no audio is played")
+            return
+        }
+        
         audioPlayer?.pause()
+        isPaused = true
         
         print("Pausing playback")
     }
@@ -271,7 +282,7 @@ class AudioManager: NSObject, AVAudioRecorderDelegate, AVAudioPlayerDelegate, Ob
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         if flag {
             print("Finished playing audio successfully")
-            
+            isPaused = false
             didFinishPlaying?()
         } else {
             print("Finished playing audio with error")

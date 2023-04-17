@@ -1,0 +1,91 @@
+[{
+        "id": "1",
+        "soundKey": "berhitung-1",
+        "text": "Sik",
+        "meaning": "One",
+        "explanation": "This word is used to count quantity or to say number",
+        "isAnswered": false,
+        "isBot": true
+    },
+    {
+        "id": "2",
+        "soundKey": "berhitung-2",
+        "text": "Dua",
+        "meaning": "Two",
+        "explanation": "This word is used to count quantity or to say number",
+        "isAnswered": false,
+        "isBot": false
+    },
+    {
+        "id": "3",
+        "soundKey": "berhitung-3",
+        "text": "Telu",
+        "meaning": "Three",
+        "explanation": "This word is used to count quantity or to say number",
+        "isAnswered": false,
+        "isBot": true
+    },
+    {
+        "id": "4",
+        "soundKey": "berhitung-4",
+        "text": "Pat",
+        "meaning": "Four",
+        "explanation": "This word is used to count quantity or to say number",
+        "isAnswered": false,
+        "isBot": false
+    },
+    {
+        "id": "5",
+        "soundKey": "berhitung-5",
+        "text": "Lima",
+        "meaning": "Five",
+        "explanation": "This word is used to count quantity or to say number",
+        "isAnswered": false,
+        "isBot": true
+    },
+    {
+        "id": "6",
+        "soundKey": "berhitung-6",
+        "text": "Nem",
+        "meaning": "Six",
+        "explanation": "This word is used to count quantity or to say number",
+        "isAnswered": false,
+        "isBot": false
+    },
+    {
+        "id": "7",
+        "soundKey": "berhitung-7",
+        "text": "Pitu",
+        "meaning": "Seven",
+        "explanation": "This word is used to count quantity or to say number",
+        "isAnswered": false,
+        "isBot": true
+    },
+    {
+        "id": "8",
+        "soundKey": "berhitung-8",
+        "text": "Kutus",
+        "meaning": "Eight",
+        "explanation": "This word is used to count quantity or to say number",
+        "isAnswered": false,
+        "isBot": false
+    },
+    {
+        "id": "9",
+        "soundKey": "berhitung-9",
+        "text": "Sia",
+        "meaning": "Nine",
+        "explanation": "This word is used to count quantity or to say number",
+        "isAnswered": false,
+        "isBot": true
+    },
+    {
+        "id": "8",
+        "soundKey": "berhitung-10",
+        "text": "Dasa",
+        "meaning": "Ten",
+        "explanation": "This word is used to count quantity or to say number",
+        "isAnswered": false,
+        "isBot": false
+    }
+]

@@ -1,0 +1,23 @@
+[
+    {
+        "id": "1",
+        "title": "Counting",
+        "description": "Learn how to count from one to ten in Balinese",
+        "explanation": "Knowing how to count up to ten in Balinese will make you able to tell how many stuff you need to local comfortably.",
+        "image": "123.rectangle.fill"
+    },
+    {
+        "id": "2",
+        "title": "Self Introduction",
+        "description": "Learn how to start a conversation and introducing yourself to others",
+        "explanation": "**Om Swastiastu** is a word that can be used in many situation. Literally it means good wishes for the other party. Usually it's used as a greeting in a polite manner. You will learn how it's used during self introduction in the upcoming conversation.",
+        "image": "person.line.dotted.person.fill"
+    },
+    {
+        "id": "3",
+        "title": "Pointing at Something",
+        "description": "Learn how to point at something that is near or far away from you",
+        "explanation": "**Nika** and **Niki** are used not only to point at something but also used to emphasize or stress a sentence meaning",
+        "image": "handbag.fill"
+    },
+]

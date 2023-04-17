@@ -3,9 +3,15 @@ import SwiftUI
 @available(iOS 16.0, *)
 @main
 struct MyApp: App {
+    @State private var isLaunching = true
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if isLaunching {
+                LaunchScreen(isLaunching: $isLaunching)
+            } else {
+                ContentView()
+            }
         }
     }
 }

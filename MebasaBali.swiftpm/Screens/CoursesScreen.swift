@@ -9,44 +9,44 @@ import SwiftUI
 
 @available(iOS 16.0, *)
 struct CoursesScreen: View {
-    
-    let topics = [
-        Topic(title: "Greeting", description: "Understanding greeting in Balinese", image: "book"),
-        Topic(title: "Direction", description: "Understanding direction in Balinese", image: "book")
-    ]
+    @Binding var path: [Route]
+    let topics:[Topic] = loadJson("topics")
     
     var body: some View {
         VStack(spacing: 0) {
             // Heading
-            HStack {
-                VStack(alignment: .leading) {
-                    Text("Om Swastiastu")
+            VStack {
+                HStack {
+
+                    VStack(alignment: .leading) {
+                        Text("Om Swastiastu")
+                        
+                        Text("Courses")
+                            .font(.largeTitle)
+                    }
+                    .foregroundColor(Color("Black400"))
                     
-                    Text("Courses")
-                        .font(.largeTitle)
+                    Spacer()
+                    
+                    Image("Logo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 75)
                 }
-                
-                Spacer()
+                .padding(.horizontal, 24)
+               
+                Divider()
             }
-            .padding(.horizontal, 24)
+
             .padding(.bottom, 8)
-            
-            // Divider
-            Divider()
             
             // Topics
             ScrollView {
                 VStack(spacing: 18) {
-                    NavigationLink{
-                        DialogueScreenExperiment().toolbar(.hidden, for: .navigationBar)
-                    } label: {
-                        TopicView(topic: topics[0])
-                    }
-                   
-                    NavigationLink {
-                        DialogueScreenExperiment().toolbar(.hidden, for: .navigationBar)
-                    } label: {
-                        TopicView(topic: topics[1])
+                    ForEach(topics) { topic in
+                        NavigationLink(value: Route.explanation(topic)) {
+                            TopicView(topic: topic)
+                        }
                     }
                 }
                 .padding([.horizontal, .top], 24)
@@ -58,7 +58,7 @@ struct CoursesScreen: View {
 @available(iOS 16.0, *)
 struct CoursesScreen_Previews: PreviewProvider {
     static var previews: some View {
-       CoursesScreen()
+        CoursesScreen(path: .constant([]))
     }
 }
 

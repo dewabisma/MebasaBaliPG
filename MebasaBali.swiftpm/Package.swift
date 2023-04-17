@@ -20,7 +20,7 @@ let package = Package(
             teamIdentifier: "578BJN6MM7",
             displayVersion: "1.0",
             bundleVersion: "1",
-            appIcon: .placeholder(icon: .bunny),
+            appIcon: .asset("AppIcon"),
             accentColor: .presetColor(.blue),
             supportedDeviceFamilies: [
                 .pad,
@@ -35,7 +35,8 @@ let package = Package(
             capabilities: [
                 .microphone(purposeString: "Recording user word pronunciation to be classified"),
                 .fileAccess(.userSelectedFiles, mode: .readWrite)
-            ]
+            ],
+            appCategory: .education
         )
     ],
     targets: [

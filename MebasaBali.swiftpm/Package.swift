@@ -33,7 +33,6 @@ let package = Package(
                 .portraitUpsideDown(.when(deviceFamilies: [.pad]))
             ],
             capabilities: [
-                .microphone(purposeString: "Recording user word pronunciation to be classified"),
                 .fileAccess(.userSelectedFiles, mode: .readWrite)
             ],
             appCategory: .education

@@ -22,7 +22,6 @@ extension Sequence where Element == DialogueSentence {
             
             buffer.append(elem)
         }
-        
         return buffer
     }
 }

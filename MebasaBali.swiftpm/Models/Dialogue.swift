@@ -22,12 +22,12 @@ struct DialogueSentence: Identifiable, Hashable, Equatable, Decodable {
 func getDialogue(_ topic:String) -> [DialogueSentence] {
     switch(topic) {
         case "1":
-            return loadJson("berhitung")
+            return loadJson("counting")
         case "2":
-            return loadJson("berkenalan")
+            return loadJson("introduction")
         case "3":
-            return loadJson("menunjuk")
+            return loadJson("pointing")
         default:
-            return loadJson("berhitung")
+            return loadJson("counting")
     }
 }

@@ -11,7 +11,7 @@ struct MyApp: App {
                 LaunchScreen(isLaunching: $isLaunching)
                     .transition(.opacity)
             } else {
-                ContentView()
+                RootView()
                     .transition(.opacity)
             }
         }

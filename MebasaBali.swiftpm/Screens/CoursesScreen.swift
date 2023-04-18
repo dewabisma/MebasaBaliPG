@@ -14,7 +14,6 @@ struct CoursesScreen: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            // Heading
             VStack {
                 HStack {
 
@@ -40,7 +39,6 @@ struct CoursesScreen: View {
 
             .padding(.bottom, 8)
             
-            // Topics
             ScrollView {
                 VStack(spacing: 18) {
                     ForEach(topics) { topic in

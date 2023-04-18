@@ -20,10 +20,6 @@ struct CultureExplanationScreen: View {
                     .fill(Color("Blue500"))
                     .frame(maxWidth: 350)
                     .shadow(color: Color("Blue300"), radius: 10)
-//                Circle()
-//                    .stroke(Color("Blue300"), lineWidth: 8)
-//                    .frame(maxWidth: 350)
-//                    .blur(radius: 8)
                 
                 Image(systemName: topic.image)
                     .font(.system(size: topic.id == "2" ? 150 : 200, weight: .bold))

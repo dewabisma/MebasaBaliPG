@@ -1,7 +1,7 @@
 [
     {
         "id": "1",
-        "soundKey": "arah-1",
+        "soundKey": "pointing-1",
         "text": "Driki genah napi?",
         "meaning": "What is placed here?",
         "explanation": "**Driki** means over here which refer to a place or point near the speaker, **genah** means place to put something on or location, and **napi** means what but it also used to form an interrogative sentence",
@@ -10,7 +10,7 @@
     },
     {
         "id": "2",
-        "soundKey": "arah-2",
+        "soundKey": "pointing-2",
         "text": "Driki genah buku",
         "meaning": "Book is placed here",
         "explanation": "**Driki** means over here which refer to a place or point near the speaker, **genah** means place to put something on or location, and **buku** means a book",
@@ -19,7 +19,7 @@
     },
     {
         "id": "3",
-        "soundKey": "arah-3",
+        "soundKey": "pointing-3",
         "text": "Nika napi?",
         "meaning": "What is that?",
         "explanation": "**Nika** literally means that which can also be used to emphasize sentence in a polite manner when put at the end of the sentence and the speaker far away from the listener, and **napi** means what but it also used to form an interrogative sentence",
@@ -28,7 +28,7 @@
     },
     {
         "id": "4",
-        "soundKey": "arah-4",
+        "soundKey": "pointing-4",
         "text": "Niki tas",
         "meaning": "This is a bag",
         "explanation": "**Niki** literally means this which also can be used to emphasize sentence in a polite manner when put at the end of the sentence and the speaker is near the listener, and **napi** means what but it also used to form an interrogative sentence",
@@ -37,7 +37,7 @@
     },
     {
         "id": "5",
-        "soundKey": "arah-5",
+        "soundKey": "pointing-5",
         "text": "Ring dija genahne?",
         "meaning": "Where is it placed?",
         "explanation": "**Ring** means at, in, or in short location, **dija** means where, and **genahne** means its place or storing location which is a variant of __genah__ that means place or location",
@@ -46,7 +46,7 @@
     },
     {
         "id": "6",
-        "soundKey": "arah-6",
+        "soundKey": "pointing-6",
         "text": "Ring drika",
         "meaning": "Over there",
         "explanation": "**Ring** means at, in, or in short location, and **drika** means over there which refer to a place or point far away from the speaker",

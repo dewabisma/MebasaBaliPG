@@ -14,7 +14,7 @@ enum Route: Hashable {
 }
 
 @available(iOS 16.0, *)
-struct ContentView: View {
+struct RootView: View {
     @State private var path: [Route] = []
     
     var body: some View {
@@ -39,8 +39,8 @@ struct ContentView: View {
 
 
 @available(iOS 16.0, *)
-struct ContentView_Previews: PreviewProvider {
+struct RootView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        RootView()
     }
 }

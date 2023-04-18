@@ -1,6 +1,6 @@
 [{
         "id": "1",
-        "soundKey": "berhitung-1",
+        "soundKey": "counting-1",
         "text": "Sik",
         "meaning": "One",
         "explanation": "This word is used to count quantity or to say number",
@@ -9,7 +9,7 @@
     },
     {
         "id": "2",
-        "soundKey": "berhitung-2",
+        "soundKey": "counting-2",
         "text": "Dua",
         "meaning": "Two",
         "explanation": "This word is used to count quantity or to say number",
@@ -18,7 +18,7 @@
     },
     {
         "id": "3",
-        "soundKey": "berhitung-3",
+        "soundKey": "counting-3",
         "text": "Telu",
         "meaning": "Three",
         "explanation": "This word is used to count quantity or to say number",
@@ -27,7 +27,7 @@
     },
     {
         "id": "4",
-        "soundKey": "berhitung-4",
+        "soundKey": "counting-4",
         "text": "Pat",
         "meaning": "Four",
         "explanation": "This word is used to count quantity or to say number",
@@ -36,7 +36,7 @@
     },
     {
         "id": "5",
-        "soundKey": "berhitung-5",
+        "soundKey": "counting-5",
         "text": "Lima",
         "meaning": "Five",
         "explanation": "This word is used to count quantity or to say number",
@@ -45,7 +45,7 @@
     },
     {
         "id": "6",
-        "soundKey": "berhitung-6",
+        "soundKey": "counting-6",
         "text": "Nem",
         "meaning": "Six",
         "explanation": "This word is used to count quantity or to say number",
@@ -54,7 +54,7 @@
     },
     {
         "id": "7",
-        "soundKey": "berhitung-7",
+        "soundKey": "counting-7",
         "text": "Pitu",
         "meaning": "Seven",
         "explanation": "This word is used to count quantity or to say number",
@@ -63,7 +63,7 @@
     },
     {
         "id": "8",
-        "soundKey": "berhitung-8",
+        "soundKey": "counting-8",
         "text": "Kutus",
         "meaning": "Eight",
         "explanation": "This word is used to count quantity or to say number",
@@ -72,7 +72,7 @@
     },
     {
         "id": "9",
-        "soundKey": "berhitung-9",
+        "soundKey": "counting-9",
         "text": "Sia",
         "meaning": "Nine",
         "explanation": "This word is used to count quantity or to say number",
@@ -81,7 +81,7 @@
     },
     {
         "id": "8",
-        "soundKey": "berhitung-10",
+        "soundKey": "counting-10",
         "text": "Dasa",
         "meaning": "Ten",
         "explanation": "This word is used to count quantity or to say number",

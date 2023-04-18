@@ -31,16 +31,16 @@ class AudioManager: NSObject, AVAudioRecorderDelegate, AVAudioPlayerDelegate, Ob
         audioSession = AVAudioSession.sharedInstance()
         
         do {
-            try audioSession?.setCategory(.playAndRecord)
+            try audioSession?.setCategory(.playback)
             //            try audioSession?.setActive(true)
             
-            audioSession?.requestRecordPermission({ status in
-                if !status {
-                    self.isNotPermitted.toggle()
-                } else {
-                    self.getAudios()
-                }
-            })
+//            audioSession?.requestRecordPermission({ status in
+//                if !status {
+//                    self.isNotPermitted.toggle()
+//                } else {
+//                    self.getAudios()
+//                }
+//            })
         } catch {
             print("Error setting up audio session: \(error.localizedDescription)")
         }

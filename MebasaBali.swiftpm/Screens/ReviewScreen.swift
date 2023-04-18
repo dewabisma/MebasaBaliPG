@@ -13,6 +13,7 @@ struct ReviewScreen: View {
     
     @State var progress:Float
     @State var progressCounter: Int
+    @State var isPlaying = false
     
     var topic: Topic
     var dialogues: [DialogueSentence]
@@ -23,7 +24,7 @@ struct ReviewScreen: View {
         self._progress = State(wrappedValue: 0.0)
         self._progressCounter = State(wrappedValue: 0)
         self.topic = topic
-        self.dialogues = getDialogue(topic.id)
+        self.dialogues = getDialogue(topic.id).uniqueDialogues()
     }
     
     var body: some View {
@@ -50,10 +51,16 @@ struct ReviewScreen: View {
             VStack {
                 GeometryReader { GeometryProxy in
                     ZStack() {
-                        Text(dialogue?.text ?? "Index out of bound")
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(.white)
-                            .font(.system(size: 40, weight: .bold))
+                        VStack(spacing: 16) {
+                            Text(dialogue?.text ?? "Index out of bound")
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(.white)
+                                .font(.system(size: 36, weight: .bold))
+                            
+                            Text(.init(dialogue?.meaning ?? ""))
+                                .foregroundColor(.black.opacity(0.4))
+                                .font(.system(size: 24, weight: .semibold))
+                        }
                         
                         
                         Text("Click the box to replay the audio")
@@ -65,22 +72,26 @@ struct ReviewScreen: View {
             .frame(width: 500, height: 250)
             .padding(.horizontal, 24)
             .padding(.vertical, 12)
-            .background(Color("Blue500"))
+            .background(isPlaying ? Color("Blue300") : Color("Blue500"))
             .cornerRadius(12)
             .onTapGesture {
                 if audioManager.isPlaying {
                     audioManager.stopPlayback()
+                    isPlaying = false
                 } else {
                     audioManager.startPlaybackFromResources(key: dialogue?.soundKey ?? "", ext: "wav")
+                    isPlaying = true
                 }
             }
             .onAppear{
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     audioManager.startPlaybackFromResources(key: dialogue?.soundKey ?? "", ext: "wav")
+                    isPlaying = true
                 }
                 
                 audioManager.didFinishPlaying = {
                     audioManager.isPlaying = false
+                    isPlaying = false
                 }
             }
             .onChange(of: progressCounter) { newValue in
@@ -88,17 +99,17 @@ struct ReviewScreen: View {
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     audioManager.startPlaybackFromResources(key: newDialog?.soundKey ?? "", ext: "wav")
+                    isPlaying = true
                 }
                 
                 audioManager.didFinishPlaying = {
                     audioManager.isPlaying = false
+                    isPlaying = false
                 }
             }
+            .animation(.easeIn, value: isPlaying)
             
-            VStack(spacing: 20) {
-                Text(.init(dialogue?.meaning ?? ""))
-                    .font(.system(size: 24, weight: .semibold))
-                
+            VStack(spacing: 0) {
                 Text(.init(dialogue?.explanation ?? ""))
                     .font(.system(size: 24))
             }
@@ -133,6 +144,6 @@ struct ReviewScreen: View {
 
 struct ReviewScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ReviewScreen(audioManager: AudioManager.shared, path: .constant([]), topic: Topic(id: "1", title: "Counting", description: "Learn how to count from one to ten in Balinese", explanation: "Knowing how to count up to ten in Balinese will make you able to tell how many stuff you need to local comfortably.", image: "123.rectangle.fill"))
+        ReviewScreen(audioManager: AudioManager.shared, path: .constant([]), topic: Topic(id: "2", title: "Counting", description: "Learn how to count from one to ten in Balinese", explanation: "Knowing how to count up to ten in Balinese will make you able to tell how many stuff you need to local comfortably.", image: "123.rectangle.fill"))
     }
 }

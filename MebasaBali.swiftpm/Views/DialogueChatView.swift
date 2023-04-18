@@ -84,6 +84,8 @@ struct DialogueChatView: View {
     @Binding var progressCounter: Int
     
     @State var isHovered: Bool = false
+    @State var isPlaying: Bool = false
+    @State var isWrong: Bool = false
     
     var autoPlay = false
     var pointy:Pointy = .left
@@ -99,12 +101,42 @@ struct DialogueChatView: View {
                 switch (pointy) {
                 case .left:
                     LeafShapePointyLeft()
+                        .fill(Color("Blue300"))
+                        .scaleEffect(isPlaying ? 1.1 : 1)
+                        .opacity(isPlaying ? 1 : 0)
+                        .animation(isPlaying ? .easeIn(duration: 0.5).repeatForever().speed(1) : .easeIn(duration: 0.5), value: isPlaying)
+                    LeafShapePointyLeft()
+                        .fill(Color("Blue300"))
+                        .scaleEffect(isPlaying ? 1.2 : 1)
+                        .opacity(isPlaying ? 0.6 : 0)
+                        .animation(isPlaying ? .easeIn(duration: 0.4).delay(0.1).repeatForever() : .easeIn(duration: 0.4).delay(0.1), value: isPlaying)
+                    LeafShapePointyLeft()
+                        .fill(Color("Blue300"))
+                        .scaleEffect(isPlaying ? 1.3 : 1)
+                        .opacity(isPlaying ? 0.3 : 0)
+                        .animation(isPlaying ? .easeIn(duration: 0.3).delay(0.2).repeatForever() : .easeIn(duration: 0.3).delay(0.2), value: isPlaying)
+                    LeafShapePointyLeft()
                         .fill(Color("Blue600"))
-                    
                     
                 case .right:
                     LeafShapePointyRight()
+                        .fill(Color("Blue300"))
+                        .scaleEffect(isPlaying ? 1.1 : 1)
+                        .opacity(isPlaying ? 1 : 0)
+                        .animation(isPlaying ? .easeIn(duration: 0.5).repeatForever().speed(1) : .easeIn(duration: 0.5), value: isPlaying)
+                    LeafShapePointyRight()
+                        .fill(Color("Blue300"))
+                        .scaleEffect(isPlaying ? 1.2 : 1)
+                        .opacity(isPlaying ? 0.6 : 0)
+                        .animation(isPlaying ? .easeIn(duration: 0.4).delay(0.1).repeatForever() : .easeIn(duration: 0.4).delay(0.1), value: isPlaying)
+                    LeafShapePointyRight()
+                        .fill(Color("Blue300"))
+                        .scaleEffect(isPlaying ? 1.3 : 1)
+                        .opacity(isPlaying ? 0.3 : 0)
+                        .animation(isPlaying ? .easeIn(duration: 0.3).delay(0.2).repeatForever() : .easeIn(duration: 0.3).delay(0.2), value: isPlaying)
+                    LeafShapePointyRight()
                         .fill(Color("Blue400"))
+                    
                     if isHovered {
                         LeafShapePointyRight()
                             .stroke(Color("Blue600"), lineWidth: 4)
@@ -135,6 +167,7 @@ struct DialogueChatView: View {
                 }
             }
             .frame(width: 300, height: 150)
+            .shake(percentage: isWrong ? 1 : 0)
             .onDrop(
                 of: [.url],
                 isTargeted: dialogue.isAnswered ? nil : $isHovered,
@@ -156,10 +189,20 @@ struct DialogueChatView: View {
                                 withAnimation {
                                     dialogue.isAnswered = true
                                     userDialogues[index!].isAnswered = true
+                                    audioManager.stopPlayback()
+                                    isPlaying = false
                                 }
                                 
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                                     progressCounter += 1
+                                }
+                            } else {
+                                withAnimation(.interpolatingSpring(stiffness: 100, damping: 10)) {
+                                    isWrong = true
+                                    
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                        isWrong = false
+                                    }
                                 }
                             }
                         }
@@ -171,8 +214,16 @@ struct DialogueChatView: View {
                 if audioManager.isPlaying {
                     audioManager.stopPlayback()
                     botIsTalking = false
+                    isPlaying = false
                 } else {
                     action()
+                    isPlaying = true
+                    
+                    audioManager.didFinishPlaying = {
+                        audioManager.isPlaying = false
+                        botIsTalking = false
+                        isPlaying = false
+                    }
                 }
             }
             .onAppear{
@@ -180,15 +231,17 @@ struct DialogueChatView: View {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                         action()
                         botIsTalking = true
+                        isPlaying = true
                     }
+                }
+                
+                audioManager.didFinishPlaying = {
+                    audioManager.isPlaying = false
+                    botIsTalking = false
+                    isPlaying = false
                     
-                    audioManager.didFinishPlaying = {
-                        audioManager.isPlaying = false
-                        botIsTalking = false
-                        
-                        if dialogue.isBot || dialogue.isAnswered {
-                            progressCounter += 1
-                        }
+                    if dialogue.isBot || dialogue.isAnswered {
+                        progressCounter += 1
                     }
                 }
             }
@@ -202,15 +255,26 @@ struct DialogueChatView: View {
 
 struct DialogueChatView_Previews: PreviewProvider {
     static var previews: some View {
-        DialogueChatView(dialogue: .constant(DialogueSentence(soundKey: "dddd", text: "ddd", meaning: "ddd", explanation: "kdowakodwkoa")), userDialogues: .constant([DialogueSentence(soundKey: "dddd", text: "ddd", meaning: "ddd", explanation: "dkwoakdowakodkwoad")]), botIsTalking: .constant(false),
-                         progressCounter: .constant(1), pointy: .right) {
-            
-        }
-        
-        DialogueChatView(dialogue: .constant(DialogueSentence(soundKey: "dddd", text: "ddd", meaning: "ddd", explanation: "dkwaodkoawkod")), userDialogues: .constant([DialogueSentence(soundKey: "dddd", text: "ddd", meaning: "ddd", explanation: "dkwoadkokaodkaw")]), botIsTalking: .constant(false),
-                         progressCounter: .constant(1), pointy: .left) {
-            
-        }
+        WithAudioManager()
     }
 }
 
+struct WithAudioManager:View {
+    @StateObject var audioManager = AudioManager.shared
+    
+    var body: some View {
+        VStack {
+            DialogueChatView(dialogue: .constant(DialogueSentence(soundKey: "dddd", text: "ddd", meaning: "ddd", explanation: "kdowakodwkoa")), userDialogues: .constant([DialogueSentence(soundKey: "dddd", text: "ddd", meaning: "ddd", explanation: "dkwoakdowakodkwoad")]), botIsTalking: .constant(false),
+                             progressCounter: .constant(1), pointy: .right) {
+                
+            }
+                             .environmentObject(audioManager)
+            
+            DialogueChatView(dialogue: .constant(DialogueSentence(soundKey: "dddd", text: "ddd", meaning: "ddd", explanation: "dkwaodkoawkod")), userDialogues: .constant([DialogueSentence(soundKey: "dddd", text: "ddd", meaning: "ddd", explanation: "dkwoadkokaodkaw")]), botIsTalking: .constant(false),
+                             progressCounter: .constant(1), pointy: .left) {
+                
+            }
+                             .environmentObject(audioManager)
+        }
+    }
+}

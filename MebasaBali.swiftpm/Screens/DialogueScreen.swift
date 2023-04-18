@@ -104,6 +104,7 @@ struct DialogueScreen: View {
                                 .background {
                                     RoundedRectangle(cornerRadius: 6, style: .continuous).fill(dialogue.isAnswered ? Color("Blue500") : .clear)
                                 }
+                                .disabled(audioManager.isPlaying)
                         }
                     }
                 }

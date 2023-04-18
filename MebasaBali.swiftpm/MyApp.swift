@@ -9,8 +9,10 @@ struct MyApp: App {
         WindowGroup {
             if isLaunching {
                 LaunchScreen(isLaunching: $isLaunching)
+                    .transition(.opacity)
             } else {
                 ContentView()
+                    .transition(.opacity)
             }
         }
     }
